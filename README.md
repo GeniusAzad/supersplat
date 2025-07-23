@@ -1,54 +1,168 @@
-# SuperSplat - 3D Gaussian Splat Editor
+# 3D Gaussian Splats Marketplace
 
-| [SuperSplat Editor](https://superspl.at/editor) | [User Guide](https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/) | [Forum](https://forum.playcanvas.com/) | [Discord](https://discord.gg/RSaMRzg) |
+A comprehensive marketplace for buying and selling 3D Gaussian Splats built with React, TypeScript, and Supabase.
 
-SuperSplat is a free and open source tool for inspecting, editing, optimizing and publishing 3D Gaussian Splats. It is built on web technologies and runs in the browser, so there's nothing to download or install.
+## 🚀 Features
 
-A live version of this tool is available at: https://superspl.at/editor
+### For Buyers
+- **Browse & Search**: Discover thousands of high-quality 3D Gaussian Splats
+- **Advanced Filtering**: Filter by category, price range, ratings, and more
+- **Detailed Previews**: View splats with thumbnails and detailed information
+- **Reviews & Ratings**: Read reviews from other buyers
+- **Secure Downloads**: Instant access to purchased content
 
-![image](https://github.com/user-attachments/assets/b6cbb5cc-d3cc-4385-8c71-ab2807fd4fba)
+### For Sellers
+- **Easy Upload**: Drag & drop interface for .ply and .splat files
+- **Seller Dashboard**: Track earnings, downloads, and performance
+- **Automated Thumbnails**: AI-generated previews for your splats
+- **Flexible Pricing**: Set your own prices and manage listings
+- **Analytics**: Detailed insights into your sales performance
 
-To learn more about using SuperSplat, please refer to the [User Guide](https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/).
+### Platform Features
+- **User Authentication**: Secure sign up/sign in with Supabase Auth
+- **File Storage**: Reliable cloud storage for 3D files and thumbnails
+- **Real-time Updates**: Live data synchronization
+- **Responsive Design**: Works perfectly on desktop and mobile
+- **Modern UI**: Clean, intuitive interface built with Tailwind CSS
 
-## Local Development
+## 🛠 Tech Stack
 
-To initialize a local development environment for SuperSplat, ensure you have [Node.js](https://nodejs.org/) 18 or later installed. Follow these steps:
+- **Frontend**: React 18, TypeScript, Tailwind CSS
+- **Backend**: Supabase (PostgreSQL + Auth + Storage)
+- **State Management**: TanStack Query (React Query)
+- **Forms**: React Hook Form + Zod validation
+- **Routing**: React Router DOM
+- **Icons**: Lucide React
+- **Build Tool**: Vite
 
-1. Clone the repository:
+## 📦 Installation
 
-   ```sh
-   git clone https://github.com/playcanvas/supersplat.git
-   cd supersplat
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd gaussian-splats-marketplace
    ```
 
-2. Install dependencies:
-
-   ```sh
-   git submodule update --init
+2. **Install dependencies**
+   ```bash
    npm install
    ```
 
-3. Build SuperSplat and start a local web server:
+3. **Set up Supabase**
+   - Create a new project at [supabase.com](https://supabase.com)
+   - Copy your project URL and anon key
+   - Create a `.env` file based on `.env.example`
+   ```bash
+   cp .env.example .env
+   ```
+   - Fill in your Supabase credentials
 
-   ```sh
-   npm run develop
+4. **Run database migrations**
+   - In your Supabase dashboard, go to SQL Editor
+   - Run the migration script from `supabase/migrations/create_marketplace_schema.sql`
+
+5. **Start the development server**
+   ```bash
+   npm run dev
    ```
 
-4. Open a web browser tab and make sure network caching is disabled on the network tab and the other application caches are clear:
+## 🗄 Database Schema
 
-   - On Safari you can use `Cmd+Option+e` or Develop->Empty Caches.
-   - On Chrome ensure the options "Update on reload" and "Bypass for network" are enabled in the Application->Service workers tab:
+### Tables
+- **profiles**: User profiles and seller information
+- **splats**: 3D Gaussian Splat listings
+- **reviews**: User reviews and ratings
+- **purchases**: Purchase history and transactions
 
-   <img width="846" alt="Screenshot 2025-04-25 at 16 53 37" src="https://github.com/user-attachments/assets/888bac6c-25c1-4813-b5b6-4beecf437ac9" />
+### Storage Buckets
+- **splats**: Stores .ply and .splat files
+- **thumbnails**: Stores generated thumbnail images
 
-5. Navigate to `http://localhost:3000`
+## 🔐 Security
 
-When changes to the source are detected, SuperSplat is rebuilt automatically. Simply refresh your browser to see your changes.
+- Row Level Security (RLS) enabled on all tables
+- Authenticated users can only modify their own data
+- Public read access for browsing content
+- Secure file upload with proper validation
 
-## Contributors
+## 🎨 UI Components
 
-SuperSplat is made possible by our amazing open source community:
+### Reusable Components
+- **Button**: Multiple variants and sizes
+- **Input**: Form inputs with validation
+- **Modal**: Accessible modal dialogs
+- **LoadingSpinner**: Loading states
+- **SplatCard**: Product display cards
+- **SplatGrid**: Responsive grid layout
 
-<a href="https://github.com/playcanvas/supersplat/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=playcanvas/supersplat" />
-</a>
+### Layout Components
+- **Header**: Navigation and authentication
+- **Footer**: Site links and information
+- **FilterSidebar**: Advanced filtering options
+
+## 📱 Pages
+
+- **HomePage**: Landing page with featured content
+- **BrowsePage**: Browse and search all splats
+- **SplatDetailPage**: Detailed product view
+- **SellPage**: Upload and list new splats
+- **DashboardPage**: Seller analytics and management
+
+## 🔧 Configuration
+
+### Environment Variables
+```env
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### Tailwind Configuration
+Custom theme with:
+- Primary color palette
+- Custom animations
+- Utility classes for common patterns
+
+## 🚀 Deployment
+
+### Netlify (Recommended)
+1. Connect your repository to Netlify
+2. Set environment variables in Netlify dashboard
+3. Deploy automatically on push to main branch
+
+### Vercel
+1. Import project to Vercel
+2. Configure environment variables
+3. Deploy with automatic builds
+
+## 🔮 Future Enhancements
+
+- **Payment Integration**: Stripe/PayPal for secure transactions
+- **3D Preview**: WebGL viewer for splat files
+- **Advanced Analytics**: Detailed seller insights
+- **Social Features**: Follow sellers, wishlists
+- **Mobile App**: React Native companion app
+- **AI Features**: Auto-tagging, content recommendations
+- **Bulk Operations**: Upload multiple files at once
+- **Version Control**: Track splat updates and versions
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📄 License
+
+MIT License - see LICENSE file for details
+
+## 🆘 Support
+
+- **Documentation**: Check the README and code comments
+- **Issues**: Report bugs via GitHub Issues
+- **Community**: Join our Discord server for help and discussions
+
+---
+
+Built with ❤️ for the 3D community
