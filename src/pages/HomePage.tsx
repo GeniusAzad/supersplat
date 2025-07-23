@@ -3,6 +3,7 @@ import { ArrowRight, Star, TrendingUp, Users, Zap, Upload } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Button } from '../components/ui/Button'
 import { SplatGrid } from '../components/splats/SplatGrid'
+import { PLYViewer } from '../components/viewer/PLYViewer'
 
 export function HomePage() {
   const stats = [
@@ -24,28 +25,36 @@ export function HomePage() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary-600 via-purple-600 to-primary-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
-              The World's Premier
-              <span className="block text-yellow-300">3D Gaussian Splats</span>
-              Marketplace
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto animate-slide-up">
-              Discover, buy, and sell high-quality 3D Gaussian splats from talented creators worldwide. 
-              Perfect for games, VR, AR, and digital experiences.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
-              <Link to="/browse">
-                <Button size="lg" className="bg-white text-primary-600 hover:bg-gray-100">
-                  Start Browsing
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
-              <Link to="/sell">
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-600">
-                  Become a Seller
-                </Button>
-              </Link>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column - Text Content */}
+            <div className="text-center lg:text-left">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+                The World's Premier
+                <span className="block text-yellow-300">3D Gaussian Splats</span>
+                Marketplace
+              </h1>
+              <p className="text-xl md:text-2xl mb-8 text-gray-200 animate-slide-up">
+                Discover, buy, and sell high-quality 3D Gaussian splats from talented creators worldwide. 
+                Perfect for games, VR, AR, and digital experiences.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-slide-up">
+                <Link to="/browse">
+                  <Button size="lg" className="bg-white text-primary-600 hover:bg-gray-100">
+                    Start Browsing
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </Link>
+                <Link to="/sell">
+                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-600">
+                    Become a Seller
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Column - 3D PLY Viewer */}
+            <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <PLYViewer className="h-96 lg:h-[500px] w-full" autoRotate={true} />
             </div>
           </div>
         </div>
