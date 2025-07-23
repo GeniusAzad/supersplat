@@ -1,15 +1,47 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Plus, TrendingUp, Download, DollarSign, Eye } from 'lucide-react'
+import { Plus, TrendingUp, Download, DollarSign, Eye, Upload } from 'lucide-react'
 import { useAuth } from '../hooks/useAuth'
-import { useUserSplats } from '../hooks/useSplats'
 import { Button } from '../components/ui/Button'
 import { LoadingSpinner } from '../components/ui/LoadingSpinner'
 import { formatPrice, formatDate } from '../lib/utils'
 
+// Mock data for demonstration
+const mockUserSplats = [
+  {
+    id: '1',
+    title: 'Vintage Car Collection',
+    category: 'Vehicles',
+    price: 29.99,
+    download_count: 1247,
+    created_at: '2024-01-15T10:00:00Z',
+    reviews: [{ rating: 5 }, { rating: 4 }, { rating: 5 }]
+  },
+  {
+    id: '2',
+    title: 'Modern Architecture',
+    category: 'Architecture',
+    price: 45.00,
+    download_count: 892,
+    created_at: '2024-01-10T10:00:00Z',
+    reviews: [{ rating: 5 }, { rating: 5 }, { rating: 4 }]
+  },
+  {
+    id: '3',
+    title: 'Forest Environment',
+    category: 'Nature',
+    price: 35.50,
+    download_count: 2156,
+    created_at: '2024-01-05T10:00:00Z',
+    reviews: [{ rating: 4 }, { rating: 5 }, { rating: 4 }]
+  }
+]
+
 export function DashboardPage() {
   const { user } = useAuth()
-  const { data: splats, isLoading, error } = useUserSplats(user?.id || '')
+  const isLoading = false
+  const error = null
+  const splats = mockUserSplats
 
   if (!user) {
     return (
@@ -54,7 +86,7 @@ export function DashboardPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="card p-6">
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
             <div className="flex items-center">
               <div className="p-2 bg-green-100 rounded-lg">
                 <DollarSign className="h-6 w-6 text-green-600" />
@@ -66,7 +98,7 @@ export function DashboardPage() {
             </div>
           </div>
 
-          <div className="card p-6">
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
             <div className="flex items-center">
               <div className="p-2 bg-blue-100 rounded-lg">
                 <Download className="h-6 w-6 text-blue-600" />
@@ -78,7 +110,7 @@ export function DashboardPage() {
             </div>
           </div>
 
-          <div className="card p-6">
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
             <div className="flex items-center">
               <div className="p-2 bg-purple-100 rounded-lg">
                 <Eye className="h-6 w-6 text-purple-600" />
@@ -90,7 +122,7 @@ export function DashboardPage() {
             </div>
           </div>
 
-          <div className="card p-6">
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
             <div className="flex items-center">
               <div className="p-2 bg-orange-100 rounded-lg">
                 <TrendingUp className="h-6 w-6 text-orange-600" />
@@ -106,7 +138,7 @@ export function DashboardPage() {
         </div>
 
         {/* Splats Table */}
-        <div className="card">
+        <div className="bg-white rounded-lg shadow-md border border-gray-200">
           <div className="px-6 py-4 border-b border-gray-200">
             <h2 className="text-lg font-semibold text-gray-900">Your Splats</h2>
           </div>

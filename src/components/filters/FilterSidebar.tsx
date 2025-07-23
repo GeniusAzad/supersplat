@@ -5,9 +5,10 @@ import { Button } from '../ui/Button'
 interface FilterSidebarProps {
   isOpen: boolean
   onClose: () => void
+  onFiltersChange?: (filters: any) => void
 }
 
-export function FilterSidebar({ isOpen, onClose }: FilterSidebarProps) {
+export function FilterSidebar({ isOpen, onClose, onFiltersChange }: FilterSidebarProps) {
   const [priceRange, setPriceRange] = useState([0, 100])
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedRating, setSelectedRating] = useState(0)
@@ -24,11 +25,46 @@ export function FilterSidebar({ isOpen, onClose }: FilterSidebarProps) {
   ]
 
   const toggleCategory = (category: string) => {
-    setSelectedCategories(prev =>
-      prev.includes(category)
-        ? prev.filter(c => c !== category)
-        : [...prev, category]
-    )
+    const newCategories = selectedCategories.includes(category)
+      ? selectedCategories.filter(c => c !== category)
+      : [...selectedCategories, category]
+    
+    setSelectedCategories(newCategories)
+    onFiltersChange?.({
+      categories: newCategories,
+      priceRange,
+      rating: selectedRating
+    })
+  }
+
+  const handlePriceChange = (value: number) => {
+    const newRange = [priceRange[0], value]
+    setPriceRange(newRange)
+    onFiltersChange?.({
+      categories: selectedCategories,
+      priceRange: newRange,
+      rating: selectedRating
+    })
+  }
+
+  const handleRatingChange = (rating: number) => {
+    setSelectedRating(rating)
+    onFiltersChange?.({
+      categories: selectedCategories,
+      priceRange,
+      rating
+    })
+  }
+
+  const clearFilters = () => {
+    setSelectedCategories([])
+    setPriceRange([0, 100])
+    setSelectedRating(0)
+    onFiltersChange?.({
+      categories: [],
+      priceRange: [0, 100],
+      rating: 0
+    })
   }
 
   return (
@@ -70,7 +106,7 @@ export function FilterSidebar({ isOpen, onClose }: FilterSidebarProps) {
             <h3 className="text-sm font-medium text-gray-900 mb-3">Categories</h3>
             <div className="space-y-2">
               {categories.map((category) => (
-                <label key={category} className="flex items-center">
+                <label key={category} className="flex items-center cursor-pointer">
                   <input
                     type="checkbox"
                     checked={selectedCategories.includes(category)}
@@ -92,8 +128,8 @@ export function FilterSidebar({ isOpen, onClose }: FilterSidebarProps) {
                 min="0"
                 max="100"
                 value={priceRange[1]}
-                onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                onChange={(e) => handlePriceChange(parseInt(e.target.value))}
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
               />
               <div className="flex justify-between text-sm text-gray-600">
                 <span>$0</span>
@@ -107,12 +143,12 @@ export function FilterSidebar({ isOpen, onClose }: FilterSidebarProps) {
             <h3 className="text-sm font-medium text-gray-900 mb-3">Minimum Rating</h3>
             <div className="space-y-2">
               {[4, 3, 2, 1].map((rating) => (
-                <label key={rating} className="flex items-center">
+                <label key={rating} className="flex items-center cursor-pointer">
                   <input
                     type="radio"
                     name="rating"
                     checked={selectedRating === rating}
-                    onChange={() => setSelectedRating(rating)}
+                    onChange={() => handleRatingChange(rating)}
                     className="text-primary-600 focus:ring-primary-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">
@@ -126,7 +162,7 @@ export function FilterSidebar({ isOpen, onClose }: FilterSidebarProps) {
           {/* Sort By */}
           <div className="mb-6">
             <h3 className="text-sm font-medium text-gray-900 mb-3">Sort By</h3>
-            <select className="w-full input">
+            <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent">
               <option>Most Popular</option>
               <option>Newest</option>
               <option>Price: Low to High</option>
@@ -139,11 +175,7 @@ export function FilterSidebar({ isOpen, onClose }: FilterSidebarProps) {
           <Button
             variant="outline"
             className="w-full"
-            onClick={() => {
-              setSelectedCategories([])
-              setPriceRange([0, 100])
-              setSelectedRating(0)
-            }}
+            onClick={clearFilters}
           >
             Clear All Filters
           </Button>

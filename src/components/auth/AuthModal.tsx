@@ -133,7 +133,7 @@ export function AuthModal({ isOpen, onClose, mode, onModeChange }: AuthModalProp
           <button
             type="button"
             onClick={handleModeChange}
-            className="text-primary-600 hover:text-primary-700 text-sm"
+            className="text-primary-600 hover:text-primary-700 text-sm transition-colors"
           >
             {mode === 'signin' 
               ? "Don't have an account? Sign up" 

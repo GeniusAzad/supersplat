@@ -1,5 +1,6 @@
 import React from 'react'
-import { ArrowRight, Star, TrendingUp, Users, Zap } from 'lucide-react'
+import { ArrowRight, Star, TrendingUp, Users, Zap, Upload } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { Button } from '../components/ui/Button'
 import { SplatGrid } from '../components/splats/SplatGrid'
 
@@ -21,7 +22,7 @@ export function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="gradient-bg text-white py-20">
+      <section className="bg-gradient-to-br from-primary-600 via-purple-600 to-primary-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
@@ -34,13 +35,17 @@ export function HomePage() {
               Perfect for games, VR, AR, and digital experiences.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
-              <Button size="lg" className="bg-white text-primary-600 hover:bg-gray-100">
-                Start Browsing
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-600">
-                Become a Seller
-              </Button>
+              <Link to="/browse">
+                <Button size="lg" className="bg-white text-primary-600 hover:bg-gray-100">
+                  Start Browsing
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+              <Link to="/sell">
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-600">
+                  Become a Seller
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -75,9 +80,10 @@ export function HomePage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {featuredCategories.map((category, index) => (
-              <div 
-                key={category.name} 
-                className="card group cursor-pointer hover:shadow-xl transition-all duration-300 animate-fade-in"
+              <Link
+                key={category.name}
+                to={`/browse?category=${category.name.toLowerCase()}`}
+                className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden group cursor-pointer hover:shadow-xl transition-all duration-300 animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="relative aspect-video overflow-hidden">
@@ -94,7 +100,7 @@ export function HomePage() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -108,10 +114,12 @@ export function HomePage() {
               <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Splats</h2>
               <p className="text-gray-600">Hand-picked premium content from our top creators</p>
             </div>
-            <Button variant="outline">
-              View All
-              <ArrowRight className="ml-2 w-4 h-4" />
-            </Button>
+            <Link to="/browse">
+              <Button variant="outline">
+                View All
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
           </div>
           
           <SplatGrid splats={[]} />
@@ -129,12 +137,17 @@ export function HomePage() {
             Upload your first splat today and start building your portfolio.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-primary-600 hover:bg-gray-100">
-              Start Selling Today
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-600">
-              Learn More
-            </Button>
+            <Link to="/sell">
+              <Button size="lg" className="bg-white text-primary-600 hover:bg-gray-100">
+                <Upload className="w-5 h-5 mr-2" />
+                Start Selling Today
+              </Button>
+            </Link>
+            <Link to="/about">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-600">
+                Learn More
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
