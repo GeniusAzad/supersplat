@@ -18,7 +18,12 @@ export default {
           100: '#f1f5f9',
           500: '#64748b',
           600: '#475569',
-        }
+        },
+        border: 'hsl(var(--border))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        ring: 'hsl(var(--ring))',
+        'ring-offset': 'hsl(var(--ring-offset))'
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
