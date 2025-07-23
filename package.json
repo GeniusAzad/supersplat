@@ -21,7 +21,7 @@
         "develop:auto-launch": "concurrently --kill-others \"xdg-open 'http://localhost:3000/'\" \"npm run watch\" \"npm run serve\"",
         "lint": "eslint src",
         "postinstall": "npm run install:deps && npm run build:deps",
-        "install:deps": "npm --prefix ./submodules/supersplat-viewer ci",
+        "install:deps": "npm --prefix ./submodules/supersplat-viewer install",
         "build:deps": "npm --prefix ./submodules/supersplat-viewer run build"
     },
     "devDependencies": {
