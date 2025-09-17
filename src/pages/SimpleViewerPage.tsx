@@ -2,14 +2,14 @@ import React from 'react'
 import { PLYSequenceViewer } from '../components/viewer/PLYSequenceViewer'
 
 export function SimpleViewerPage() {
-  // Configuration for the salmon sequence
+  // Configuration matching the 4DV salmon viewer
   const sequenceConfig = {
     baseUrl: 'https://pub-79fbb62129314af79420e1ccb1a1c3f8.r2.dev/frames',
     totalFrames: 150,
   }
 
   return (
-    <div className="w-screen h-screen bg-black">
+    <div className="w-screen h-screen bg-black overflow-hidden">
       <PLYSequenceViewer
         baseUrl={sequenceConfig.baseUrl}
         totalFrames={sequenceConfig.totalFrames}
@@ -17,6 +17,7 @@ export function SimpleViewerPage() {
         autoPlay={true}
         loop={true}
         fps={30}
+        showDemo={true}
       />
     </div>
   )
