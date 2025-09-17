@@ -58,6 +58,9 @@ export function Header() {
                 <Link to="/browse" className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
                   Browse
                 </Link>
+                <Link to="/viewer" className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
+                  PLY Viewer
+                </Link>
                 <Link to="/sell" className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
                   Sell
                 </Link>
@@ -132,6 +135,9 @@ export function Header() {
               <nav className="flex flex-col space-y-4">
                 <Link to="/browse" className="text-gray-700 hover:text-primary-600 font-medium">
                   Browse
+                </Link>
+                <Link to="/viewer" className="text-gray-700 hover:text-primary-600 font-medium">
+                  PLY Viewer
                 </Link>
                 <Link to="/sell" className="text-gray-700 hover:text-primary-600 font-medium">
                   Sell

@@ -44,6 +44,11 @@ export function HomePage() {
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
+                <Link to="/viewer">
+                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-600">
+                    Try PLY Viewer
+                  </Button>
+                </Link>
                 <Link to="/sell">
                   <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-600">
                     Become a Seller

@@ -7,6 +7,7 @@ import { BrowsePage } from './pages/BrowsePage'
 import { SplatDetailPage } from './pages/SplatDetailPage'
 import { SellPage } from './pages/SellPage'
 import { DashboardPage } from './pages/DashboardPage'
+import { PLYViewerPage } from './pages/PLYViewerPage'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/splat/:id" element={<SplatDetailPage />} />
           <Route path="/sell" element={<SellPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/viewer" element={<PLYViewerPage />} />
         </Routes>
       </main>
 
